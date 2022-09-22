@@ -7,7 +7,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('rootokay-dockerhub')
     }
     stages {
-        stage('Build' {
+        stage('Build') {
             steps {
                 sh 'docker build -t ipssichris/chrishttpd .'
             }
