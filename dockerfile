@@ -1,8 +1,3 @@
-FROM php:7-apache
+FROM node:16-alpine
 
-# Activation des modules php
-RUN docker-php-ext-install pdo pdo_mysql
-
-COPY . /var/www/html/
-
-WORKDIR  /var/www/html
+RUN apk add -U git curl
