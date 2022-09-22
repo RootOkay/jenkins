@@ -11,7 +11,7 @@ pipeline{
         }
         stage('Build') {
             steps {
-                sh 'docker build -t ipssichris/chrishttpd'
+                sh 'docker build -t ipssichris/chrishttpd.'
             }
         }
         stage('Login') {
