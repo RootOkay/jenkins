@@ -1,12 +1,31 @@
 pipeline {
-  agent {
-    docker { image 'node:16-alpine' }
-  }
-  stages {
-    stage('Test') {
-      steps {
-        sh 'node --version'
-      }
+    agent { label 'linux' }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-  }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('ipssichris')
+    }
+    stages {
+        stage('Build' {
+            steps {
+                sh 'docker build -t ipssichris/chrishttpd .'
+            }
+        }
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('Push') {
+            steps {
+                sh 'docker push ipssichris/chrishttpd'
+            }
+        }
+    }
+    post {
+        always {
+            sh 'docker logout'
+        }
+    }
 }
