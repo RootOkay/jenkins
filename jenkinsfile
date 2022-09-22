@@ -1,10 +1,14 @@
-pipeline {
-    agent any
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('rootokay-dockerhub')
-    }
+pipeline{
+     agent any environment {
+        DOCKERHUB_CREDENTIALS=credentials('rootokay-dockerhub')
+      }
     stages {
-        stage('Build') {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/RootOkay/jenkins/'
+            }
+        }
+        stage('Build' {
             steps {
                 sh 'docker build -t ipssichris/chrishttpd .'
             }
