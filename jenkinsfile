@@ -11,7 +11,7 @@ pipeline{
         }
         stage('Build') {
             steps {
-                sh 'docker build -t ipssichris/chrishttpd . '
+                sh 'docker build -t python:3.8-slim-buster . '
             }
         }
         stage('Login') {
@@ -21,7 +21,7 @@ pipeline{
         }
         stage('Push') {
             steps {
-                sh 'docker push ipssichris/chrishttpd'
+                sh 'docker push python:3.8-slim-buster'
             }
         }
     }
